@@ -1,0 +1,564 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-03 23:42+0300\n"
+"PO-Revision-Date: 2026-05-03 16:30+0300\n"
+"Last-Translator: Rumeysa <email@address.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cart/templates/cart/detail.html:4
+#, fuzzy
+#| msgid "Alışverişe Devam Et"
+msgid "Alışveriş Sepetim"
+msgstr "Continue Shopping"
+
+#: cart/templates/cart/detail.html:8
+msgid "ALIŞVERİŞ SEPETİM"
+msgstr "SHOPPING CART"
+
+#: cart/templates/cart/detail.html:15 shop/templates/shop/checkout.html:153
+msgid "Ürün"
+msgstr "Product"
+
+#: cart/templates/cart/detail.html:16 shop/templates/shop/product/list.html:57
+msgid "Adet"
+msgstr "Pieces"
+
+#: cart/templates/cart/detail.html:17
+msgid "Birim Fiyat"
+msgstr "Unit Price"
+
+#: cart/templates/cart/detail.html:18
+msgid "Toplam"
+msgstr "Total"
+
+#: cart/templates/cart/detail.html:19
+msgid "İşlem"
+msgstr "Action"
+
+#: cart/templates/cart/detail.html:35
+msgid "TOPTAN SATIŞ"
+msgstr ""
+
+#: cart/templates/cart/detail.html:37
+msgid "PERAKENDE SATIŞ"
+msgstr ""
+
+#: cart/templates/cart/detail.html:74
+#, fuzzy
+#| msgid "Ürün Adı"
+msgid "Ürünü Kaldır"
+msgstr "Product Name"
+
+#: cart/templates/cart/detail.html:88
+msgid "Alışverişe Devam Et"
+msgstr "Continue Shopping"
+
+#: cart/templates/cart/detail.html:93
+msgid "ÖZET"
+msgstr "SUMMARY"
+
+#: cart/templates/cart/detail.html:94
+msgid "Genel Toplam:"
+msgstr "Grand Total:"
+
+#: cart/templates/cart/detail.html:99
+msgid "Ödemeye Geç"
+msgstr "Proceed to Checkout"
+
+#: cart/templates/cart/detail.html:112
+msgid "Sepetiniz şu an boş."
+msgstr ""
+
+#: cart/templates/cart/detail.html:113
+msgid "Görünüşe göre henüz bir ürün eklemediniz."
+msgstr ""
+
+#: cart/templates/cart/detail.html:115
+msgid "Ürünleri Keşfet"
+msgstr ""
+
+#: gumus_projesi/settings.py:93
+msgid "Turkish"
+msgstr "Turkish"
+
+#: gumus_projesi/settings.py:94
+msgid "English"
+msgstr "English"
+
+#: shop/forms.py:6 shop/templates/shop/checkout.html:27
+msgid "Adınız"
+msgstr "First Name"
+
+#: shop/forms.py:7 shop/templates/shop/checkout.html:31
+msgid "Soyadınız"
+msgstr "Last Name"
+
+#: shop/forms.py:8 shop/templates/shop/checkout.html:57
+#, fuzzy
+#| msgid "E-posta Adresi"
+msgid "E-posta"
+msgstr "Email Address"
+
+#: shop/forms.py:9
+msgid "Telefon"
+msgstr ""
+
+#: shop/forms.py:11
+msgid "Adres"
+msgstr "Address"
+
+#: shop/forms.py:12 shop/templates/shop/checkout.html:43
+msgid "Şehir"
+msgstr "City"
+
+#: shop/models.py:8
+msgid "Kategori Adı"
+msgstr "Category Name"
+
+#: shop/models.py:20
+msgid "Ürün Adı"
+msgstr "Product Name"
+
+#: shop/models.py:21
+msgid "Açıklama"
+msgstr "Description"
+
+#: shop/models.py:24
+msgid "Gram Ağırlığı"
+msgstr "Weight (Gram)"
+
+#: shop/models.py:25
+msgid "İşçilik Bedeli"
+msgstr "Labor Cost"
+
+#: shop/models.py:28
+msgid "Perakende Fiyat"
+msgstr "Retail Price"
+
+#: shop/models.py:29
+msgid "Toptan Fiyat"
+msgstr "Wholesale Price"
+
+#: shop/models.py:31
+msgid "Ürün Görseli"
+msgstr "Product Image"
+
+#: shop/models.py:32
+msgid "Stok Adedi"
+msgstr "Stock Quantity"
+
+#: shop/templates/registration/login.html:4
+#: shop/templates/registration/login.html:34
+#: shop/templates/shop/checkout_gateway.html:11
+msgid "Giriş Yap"
+msgstr "Login"
+
+#: shop/templates/registration/login.html:11
+msgid "Kullanıcı Girişi"
+msgstr "User Login"
+
+#: shop/templates/registration/login.html:24
+msgid "Kullanıcı Adı"
+msgstr "Username"
+
+#: shop/templates/registration/login.html:29
+msgid "Şifre"
+msgstr "Password"
+
+#: shop/templates/registration/login.html:43
+msgid "Henüz hesabınız yok mu?"
+msgstr "Don't have an account yet?"
+
+#: shop/templates/registration/login.html:44
+msgid "Hemen Kayıt Ol"
+msgstr "Register Now"
+
+#: shop/templates/registration/login.html:51
+msgid "Üye olmadan devam et"
+msgstr "Continue without membership"
+
+#: shop/templates/shop/base.html:140 shop/templates/shop/product/list.html:57
+msgid "Toptan"
+msgstr "Wholesale"
+
+#: shop/templates/shop/base.html:141
+msgid "Perakende"
+msgstr "Retail"
+
+#: shop/templates/shop/base.html:164 shop/templates/shop/index.html:48
+msgid "Sipariş Takibi"
+msgstr "Order Tracking"
+
+#: shop/templates/shop/base.html:166
+msgid "Çıkış Yap"
+msgstr "Exıt"
+
+#: shop/templates/shop/base.html:184
+msgid "Işıltını Keşfet"
+msgstr "Discover Your Sparkle"
+
+#: shop/templates/shop/base.html:187
+#, fuzzy
+msgid "KOLEKSİYONU İNCELE"
+msgstr "EXPLORE THE COLLECTION"
+
+#: shop/templates/shop/base.html:204
+#, fuzzy
+#| msgid "Ürün Ara"
+msgid "Ürün ara..."
+msgstr "Search Product"
+
+#: shop/templates/shop/base.html:208
+msgid "Koleksiyonlar"
+msgstr "Collections"
+
+#: shop/templates/shop/base.html:209
+msgid "Tüm Ürünler"
+msgstr "All Product"
+
+#: shop/templates/shop/base.html:225
+msgid "Işıltımızdan Haberdar Olun"
+msgstr "Stay Informed About Our Sparkle"
+
+#: shop/templates/shop/base.html:226
+msgid "Yeni koleksiyonlar ve indirimler için abone olun."
+msgstr "Subscribe for new collections and discounts."
+
+#: shop/templates/shop/base.html:228
+msgid "E-posta adresiniz"
+msgstr "Your email address"
+
+#: shop/templates/shop/base.html:229
+msgid "Abone Ol"
+msgstr "Subscribe"
+
+#: shop/templates/shop/checkout.html:4
+#, fuzzy
+#| msgid "Ödemeye Geç"
+msgid "Ödeme"
+msgstr "Proceed to Checkout"
+
+#: shop/templates/shop/checkout.html:12
+msgid "Teslimat Bilgileri"
+msgstr "Shipping Information"
+
+#: shop/templates/shop/checkout.html:37
+msgid "Tam Adres"
+msgstr "Full Address"
+
+#: shop/templates/shop/checkout.html:47
+msgid "Posta Kodu"
+msgstr "Postcode"
+
+#: shop/templates/shop/checkout.html:51
+msgid "Ülke"
+msgstr "Country"
+
+#: shop/templates/shop/checkout.html:63
+msgid "Telefon Numarası"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:78
+msgid "Hediye Paketi Seçenekleri"
+msgstr "Gift Wrap Options"
+
+#: shop/templates/shop/checkout.html:83
+msgid "Bu sipariş hediye paketinde hazırlansın."
+msgstr "Prepare this order in a gift wrap."
+
+#: shop/templates/shop/checkout.html:88
+msgid "Hediye Notunuz (İsteğe Bağlı)"
+msgstr "Your Gift Note (Optional)"
+
+#: shop/templates/shop/checkout.html:96
+msgid "Ödeme Yöntemi"
+msgstr "Payment Method"
+
+#: shop/templates/shop/checkout.html:101
+msgid "Kapıda Nakit / Kart ile Ödeme"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:108
+msgid "Kredi / Banka Kartı"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:115
+msgid "Kart Sahibi"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:116
+msgid "Kart Üzerindeki İsim"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:119
+msgid "Kart Numarası"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:123
+msgid "Ay (AA)"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:127
+msgid "Yıl (YY)"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:140
+msgid "SİPARİŞİ TAMAMLA"
+msgstr "COMPLETE ORDER"
+
+#: shop/templates/shop/checkout.html:152
+msgid "SEPET ÖZETİ"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:160
+msgid "adet"
+msgstr ""
+
+#: shop/templates/shop/checkout.html:166
+msgid "TOPLAM"
+msgstr ""
+
+#: shop/templates/shop/checkout_gateway.html:4
+#, fuzzy
+#| msgid "Hediye Paketi Seçenekleri"
+msgid "Ödeme Seçenekleri"
+msgstr "Gift Wrap Options"
+
+#: shop/templates/shop/checkout_gateway.html:12
+msgid "Siparişinizi takip etmek ve avantajlardan yararlanmak için giriş yapın."
+msgstr "Sign in to track your order and enjoy exclusive benefits."
+
+#: shop/templates/shop/checkout_gateway.html:14
+msgid "GİRİŞ YAP"
+msgstr "SIGN IN"
+
+#: shop/templates/shop/checkout_gateway.html:17
+msgid "Henüz hesabınız yok mu? Kayıt Olun"
+msgstr "Don't have an account? Register"
+
+#: shop/templates/shop/checkout_gateway.html:23
+msgid "Üye Olmadan Devam Et"
+msgstr "Checkout as Guest"
+
+#: shop/templates/shop/checkout_gateway.html:24
+msgid "Hesap oluşturmadan hızlıca siparişinizi tamamlayabilirsiniz."
+msgstr "You can complete your order quickly without creating an account."
+
+#: shop/templates/shop/checkout_gateway.html:26
+msgid "MİSAFİR OLARAK DEVAM ET"
+msgstr "CONTINUE AS GUEST"
+
+#: shop/templates/shop/faq.html:8 shop/templates/shop/index.html:38
+msgid "Sıkça Sorulan Sorular"
+msgstr "Frequently Asked Questions"
+
+#: shop/templates/shop/faq.html:15
+msgid "Ürünleriniz gerçek gümüş mü?"
+msgstr "Are your products real silver?"
+
+#: shop/templates/shop/faq.html:20
+msgid ""
+"Evet, tüm gümüş takılarımız 925 ayar gümüştür. Altın kaplama modellerimizde "
+"ise en kaliteli zirkon taşlar ve altın kaplama teknikleri kullanılır."
+msgstr ""
+"Yes, all our silver jewelry is 925 sterling silver. For our gold-plated "
+"models, the highest quality zircon stones and gold-plating techniques are "
+"used."
+
+#: shop/templates/shop/faq.html:29
+msgid "Ürünler kararma yapar mı?"
+msgstr "Do the products tarnish?"
+
+#: shop/templates/shop/faq.html:34
+msgid ""
+"Gümüş doğası gereği zamanla oksitlenebilir. Ancak ürünlerimizi "
+"kimyasallardan uzak tutarak ve düzenli bakım yaparak ömrünü uzatabilirsiniz."
+msgstr ""
+"Silver can oxidize over time by nature. However, you can extend the life of "
+"your products by keeping them away from chemicals and performing regular "
+"maintenance."
+
+#: shop/templates/shop/faq.html:43
+msgid "Değişim ve iade imkanı var mı?"
+msgstr "Is there an option for exchange or return?"
+
+#: shop/templates/shop/faq.html:48
+msgid ""
+"Hijyen kuralları gereği küpe grubunda iade kabul edilmemektedir. Diğer "
+"ürünlerde kullanılmamış olması şartıyla 14 gün içinde değişim yapabilirsiniz."
+msgstr ""
+"Due to hygiene regulations, returns are not accepted for earrings. For other "
+"products, you can make an exchange within 14 days, provided they are unused."
+
+#: shop/templates/shop/faq.html:55
+msgid "Aradığınız cevabı bulamadınız mı?"
+msgstr "Couldn't find the answer you were looking for?"
+
+#: shop/templates/shop/faq.html:56
+msgid "Bize WhatsApp'tan Yazın"
+msgstr "Message us on WhatsApp"
+
+#: shop/templates/shop/index.html:14
+msgid "Hakkımızda"
+msgstr "About Us"
+
+#: shop/templates/shop/index.html:16
+msgid ""
+"Takı Pazar olarak, zirkon ve altın kaplama aksesuarlarımızla her anınıza "
+"ışıltı katmayı hedefliyoruz. Tasarımlarımızda zarafeti ve kaliteyi ön planda "
+"tutuyoruz."
+msgstr ""
+"As Takı Pazar, we aim to add sparkle to your every moment with our zircon "
+"and gold-plated accessories. We prioritize elegance and quality in our "
+"designs."
+
+#: shop/templates/shop/index.html:22
+msgid "İletişim"
+msgstr "Contact"
+
+#: shop/templates/shop/index.html:29
+msgid ""
+"Yenibosna Merkez Mahallesi Ladin Sokak Kuyumcukent Wedding World Avm Zemin "
+"Kat No:197 Yenibosna-İstanbul/Türkiye"
+msgstr ""
+
+#: shop/templates/shop/index.html:35
+msgid "Müşteri Hizmetleri"
+msgstr "Customer Service"
+
+#: shop/templates/shop/index.html:41
+msgid "İade Koşulları"
+msgstr "Return Policy"
+
+#: shop/templates/shop/index.html:50
+msgid "KARGO TAKİP"
+msgstr "TRACK YOUR ORDER"
+
+#: shop/templates/shop/index.html:58
+msgid "Tüm hakları saklıdır."
+msgstr "All rights reserved."
+
+#: shop/templates/shop/product/list.html:6
+msgid "Sonuçları"
+msgstr "Results"
+
+#: shop/templates/shop/product/list.html:6
+#: shop/templates/shop/product/list.html:19
+msgid "Koleksiyon"
+msgstr "Collection"
+
+#: shop/templates/shop/product/list.html:17
+msgid "İçerik Sonuçları"
+msgstr "Search Results"
+
+#: shop/templates/shop/product/list.html:38
+msgid "Görsel Yok"
+msgstr "No Image"
+
+#: shop/templates/shop/product/list.html:49
+#, fuzzy
+#| msgid "925 AYAR"
+msgid "AYAR"
+msgstr "925 STERLING SILVER"
+
+#: shop/templates/shop/product/list.html:70
+msgid "İNCELE"
+msgstr "VIEW"
+
+#: shop/templates/shop/product/list.html:77
+msgid "Aradığınız ürün bulunamadı."
+msgstr "No products found matching your search."
+
+#: shop/templates/shop/track_order.html:8
+#, fuzzy
+#| msgid "Sipariş Takibi"
+msgid "Kargo Takibi"
+msgstr "Order Tracking"
+
+#: shop/templates/shop/track_order.html:9
+msgid ""
+"Siparişinizi doğrulamak için takip numaranızı ve e-posta adresinizi giriniz."
+msgstr ""
+"Please enter your tracking number and email address to verify your order."
+
+#: shop/templates/shop/track_order.html:14
+msgid "Takip Numarası"
+msgstr ""
+
+#: shop/templates/shop/track_order.html:18
+msgid "E-posta Adresi"
+msgstr "Email Address"
+
+#: shop/templates/shop/track_order.html:21
+msgid "SİPARİŞİ SORGULA"
+msgstr "TRACK ORDER"
+
+#: shop/templates/shop/track_order.html:27
+msgid ""
+"Güvenliğiniz için sipariş detaylarına sadece doğru takip numarası ve e-posta "
+"eşleşmesi ile ulaşabilirsiniz."
+msgstr ""
+"For your security, order details can only be accessed with a correct "
+"tracking number and email match."
+
+#~ msgid "KOLYE"
+#~ msgstr "NECKLACE"
+
+#~ msgid "KÜPE"
+#~ msgstr "EARRINGS"
+
+#~ msgid "YÜZÜK"
+#~ msgstr "RING"
+
+#~ msgid "BİLEKLİK"
+#~ msgstr "BRACELET"
+
+#~ msgid "SET"
+#~ msgstr "SET"
+
+#~ msgid "Genel Toplam"
+#~ msgstr "Grand Total"
+
+#~ msgid "Sepet Özeti"
+#~ msgstr "Cart Summary"
+
+#~ msgid "TAKİ PAZAR"
+#~ msgstr "TAKI PAZAR"
+
+#~ msgid "Zirkon ve Altın Kaplama Şıklığı"
+#~ msgstr "Zircon and Gold Plated Elegance"
+
+#: shop/templates/registration/login.html:16
+msgid "Lütfen kullanıcı adınızı ve şifrenizi kontrol edin. Her iki alanın da büyük/küçük harfe duyarlı olabileceğini unutmayın."
+msgstr "Please check your username and password. Note that both fields may be case-sensitive."
+
+msgid "925 Ayar Gümüş"
+msgstr "925 Sterling Silver"
+
+msgid "STOKTA VAR"
+msgstr "IN STOCK"
+
+msgid "SEÇENEKLER"
+msgstr "OPTIONS"
+
+msgid "Lütfen bir seçenek belirleyin"
+msgstr "Please select an option"
+
+msgid "SEPETE EKLE"
+msgstr "ADD TO CART"
+
+msgid "24 Saatte Kargoda"
+msgstr "Ships within 24 Hours"
+
+msgid "Güvenli Ödeme"
+msgstr "Secure Payment"
+
+msgid "Mağaza"
+msgstr "Shop"

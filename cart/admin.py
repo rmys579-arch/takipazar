@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+# Şu an için cart (sepet) uygulamasında admin panelinde 
+# sergilenecek bir model bulunmamaktadır. 
+# Tüm ürün ve varyasyon yönetimi 'shop' uygulaması üzerinden yapılmaktadır.

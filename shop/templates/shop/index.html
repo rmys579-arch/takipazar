@@ -1,0 +1,63 @@
+{% extends "shop/base.html" %}
+{% load i18n static %}
+
+{% block content %}
+    <!-- 1. KISIM: Ürün Listesi Alanı Tamamen Kaldırıldı -->
+    <!-- Sayfa doğrudan alt bilgi paneline geçiyor -->
+
+    <!-- 2. KISIM: Alt Siyah Bilgi Paneli (Eksiltme yapılmadan korundu) -->
+    <div class="bg-black text-white py-5 px-4">
+        <div class="container-fluid">
+            <div class="row g-5 text-center text-md-start">
+                <!-- Hakkımızda Bölümü -->
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">{% trans "Hakkımızda" %}</h6>
+                    <p class="small text-secondary">
+                        {% trans "Takı Pazar olarak, zirkon ve altın kaplama aksesuarlarımızla her anınıza ışıltı katmayı hedefliyoruz. Tasarımlarımızda zarafeti ve kaliteyi ön planda tutuyoruz." %}
+                    </p>
+                </div>
+
+                <!-- İletişim Bölümü -->
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">{% trans "İletişim" %}</h6>
+                    <p class="small text-secondary">
+                        <a href="https://wa.me/905426357990" class="text-secondary text-decoration-none" target="_blank">
+                           <i class="fa-solid fa-phone me-2"></i> +90 542 635 79 90
+                         </a><br>
+            
+                        <i class="fa-solid fa-location-dot me-2 mt-2"></i> 
+                        {% trans "Yenibosna Merkez Mahallesi Ladin Sokak Kuyumcukent Wedding World Avm Zemin Kat No:197 Yenibosna-İstanbul/Türkiye" %}
+                    </p>
+                </div>
+
+                <!-- Müşteri Hizmetleri Bölümü -->
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">{% trans "Müşteri Hizmetleri" %}</h6>
+                    <ul class="list-unstyled small text-secondary">
+                        <li class="mb-2">
+                            <a href="{% url 'shop:faq' %}" class="text-secondary text-decoration-none">{% trans "Sıkça Sorulan Sorular" %}</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'shop:return_policy' %}" class="text-secondary text-decoration-none">{% trans "İade Koşulları" %}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sipariş Takibi Bölümü -->
+                <div class="col-md-3 text-center text-md-start">
+                    <h6 class="fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">{% trans "Sipariş Takibi" %}</h6>
+                    <a href="{% url 'shop:track_order' %}" class="btn btn-outline-light rounded-0 px-4 w-100 py-2 fw-bold">
+                        {% trans "KARGO TAKİP" %}
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Alt Telif Hakkı Kısmı -->
+            <div class="row mt-5 pt-4 border-top border-secondary opacity-25">
+                <div class="col text-center">
+                    <small>&copy; 2026 TAKI PAZAR. {% trans "Tüm hakları saklıdır." %}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

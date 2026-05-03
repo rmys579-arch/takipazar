@@ -1,7 +1,8 @@
 import iyzipay
+from django.utils import translation
 
-import iyzipay
-
+current_language = translation.get_language() # 'tr' veya 'en' döner
+iyzico_locale = 'tr' if current_language == 'tr' else 'en'
 def start_3ds_payment(order, card_details, cart):
     # API Anahtarları ve Bağlantı Ayarları
     options = {
@@ -15,7 +16,7 @@ def start_3ds_payment(order, card_details, cart):
 
     # İstek Sözlüğü
     request = {
-        'locale': 'tr',
+        'locale': iyzico_locale,
         'conversationId': str(order.id),
         'price': str(order.total_paid).replace(',', '.'),
         'paidPrice': str(order.total_paid).replace(',', '.'),

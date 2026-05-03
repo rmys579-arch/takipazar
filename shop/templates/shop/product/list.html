@@ -1,74 +1,80 @@
 {% extends "shop/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-    {% if category %}{{ category.name }}{% elif query %}"{{ query }}" Sonuçları{% else %}Koleksiyon{% endif %} - Takı Pazar
+    {% if category %}{{ category.name }}{% elif query %}"{{ query }}" {% trans "Sonuçları" %}{% else %}{% trans "Koleksiyon" %}{% endif %} - Takı Pazar
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <!-- Sayfa Başlığı: Kategori veya Arama Sonucuna Göre Değişir -->
+    <!-- Sayfa Başlığı -->
     <div class="mb-4">
-        <h2 class="fw-bold text-uppercase" style="letter-spacing: 1px;">
+        <h2 class="fw-bold text-uppercase border-bottom pb-2 d-inline-block" style="letter-spacing: 1px;">
             {% if category %}
-                {{ category.name }}
+                {% trans category.name %}
             {% elif query %}
-                "{{ query }}" İçin Sonuçlar
+                "{{ query }}" {% trans "İçerik Sonuçları" %}
             {% else %}
-                Koleksiyon
+                {% trans "Koleksiyon" %}
             {% endif %}
         </h2>
-        <hr style="width: 50px; height: 3px; background: black; opacity: 1;">
     </div>
 
     <!-- Ürün Listesi Grid Yapısı -->
-    <div class="row g-4">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
         {% for product in products %}
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="card h-100 border-0 position-relative product-card shadow-sm" style="border-radius: 15px; overflow: hidden;">
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm rounded-4 product-card">
                 
                 <!-- Ürün Görseli -->
-                <div class="product-img-wrapper" style="height: 250px; background: #f9f9f9;">
+                <div class="position-relative overflow-hidden rounded-top-4" style="height: 250px; background: #f9f9f9;">
                     {% if product.image %}
                         <a href="{% if product.slug %}{% url 'shop:product_detail' product.id product.slug %}{% else %}{% url 'shop:product_detail_simple' product.id %}{% endif %}">
-                            <img src="{{ product.image.url }}" class="card-img-top p-3 w-100 h-100" style="object-fit: contain;" alt="{{ product.name }}">
+                            <img src="{{ product.image.url }}" class="w-100 h-100 p-2" style="object-fit: contain;" alt="{{ product.name }}">
                         </a>
                     {% else %}
-                        <div class="d-flex align-items-center justify-content-center h-100 text-muted">Görsel Yok</div>
+                        <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+                            {% trans "Görsel Yok" %}
+                        </div>
                     {% endif %}
                 </div>
 
-                <!-- Ürün Bilgileri -->
-                <div class="card-body px-1 text-center">
-                    <a href="{% if product.slug %}{% url 'shop:product_detail' product.id product.slug %}{% else %}{% url 'shop:product_detail_simple' product.id %}{% endif %}" class="text-decoration-none text-dark">
-                        <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem; letter-spacing: 0.5px;">{{ product.name|upper }}</h6>
-                    </a>
-                    <p class="text-muted small mb-2">{{ product.weight }} GR | 925 AYAR</p>
-                    
-                    <div class="price-container mb-3">
-                        <p class="fw-bold mb-0 retail-price" style="font-size: 1.1rem;">
-                            {{ product.price_retail }} TL
-                        </p>
-
-                        <p class="fw-bold mb-0 wholesale-price d-none text-primary" style="font-size: 1.1rem;">
-                            {{ product.price_wholesale }} TL
-                            <br>
-                            <span style="font-size: 0.6rem; color: #666;">(Min. 5 Adet)</span>
-                        </p>
+                <!-- Kart İçeriği -->
+                <div class="card-body text-center d-flex flex-column justify-content-between p-3">
+                    <div>
+                        <a href="{% if product.slug %}{% url 'shop:product_detail' product.id product.slug %}{% else %}{% url 'shop:product_detail_simple' product.id %}{% endif %}" class="text-decoration-none text-dark">
+                            <h6 class="fw-bold mb-1" style="font-size: 0.9rem; letter-spacing: 0.5px;">{{ product.name|upper }}</h6>
+                        </a>
+                        <p class="text-muted small mb-2">{{ product.weight }} GR | 925 {% trans "AYAR" %}</p>
+                        
+                        <!-- Cookie Bazlı Fiyat Mantığı Entegre Edildi -->
+                        <div class="price-container mb-3">
+                            <p class="card-text fw-bold fs-5">
+                                {% if request.COOKIES.displayMode == 'toptan' %}
+                                    <span class="text-primary">
+                                        {{ product.price_wholesale }} TL 
+                                        <small class="text-muted" style="font-size: 0.6rem;">({% trans "Toptan" %} - Min. 5 {% trans "Adet" %})</small>
+                                    </span>
+                                {% else %}
+                                    <span class="text-dark">
+                                        {{ product.price_retail }} TL
+                                    </span>
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
 
                     <!-- İncele Butonu -->
-                    <div class="px-2 pb-2">
-                        <a href="{% if product.slug %}{% url 'shop:product_detail' product.id product.slug %}{% else %}{% url 'shop:product_detail_simple' product.id %}{% endif %}" class="btn btn-dark w-100 rounded-0 py-2 fw-bold">
-                            İNCELE
-                        </a>
-                    </div>
+                    <a href="{% if product.slug %}{% url 'shop:product_detail' product.id product.slug %}{% else %}{% url 'shop:product_detail_simple' product.id %}{% endif %}" class="btn btn-dark w-100 py-2 rounded-0 text-uppercase fw-bold" style="font-size: 0.8rem;">
+                        {% trans "İNCELE" %}
+                    </a>
                 </div>
             </div>
         </div>
         {% empty %}
         <div class="col-12 text-center py-5">
-            <h4 class="text-muted lang-content" data-tr="Aradığınız ürün bulunamadı." data-en="No products found.">Aradığınız ürün bulunamadı.</h4>
+            <h4 class="text-muted">{% trans "Aradığınız ürün bulunamadı." %}</h4>
         </div>
         {% endfor %}
     </div>
@@ -76,21 +82,13 @@
 
 <style>
     /* Kart Hover Efekti */
-    .product-card { transition: transform 0.3s; }
+    .product-card { transition: transform 0.3s; border-radius: 15px !important; }
     .product-card:hover { transform: translateY(-5px); }
 
-    .product-img-wrapper { position: relative; cursor: pointer; }
-    
     /* Görsel Hover Opasite */
-    .product-img-wrapper:hover img {
+    .product-card img:hover {
         opacity: 0.8;
         transition: 0.3s;
     }
-
-    /* Fiyat Modu CSS Mantığı */
-    body.toptan-mod .retail-price { display: none !important; }
-    body.toptan-mod .wholesale-price { display: block !important; }
-    body.perakende-mod .retail-price { display: block !important; }
-    body.perakende-mod .wholesale-price { display: none !important; }
 </style>
 {% endblock %}

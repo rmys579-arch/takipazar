@@ -1,0 +1,61 @@
+{% extends "shop/base.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="fw-bold mb-5 text-center">{% trans "Sıkça Sorulan Sorular" %}</h2>
+            
+            <div class="accordion accordion-flush" id="faqAccordion">
+                <!-- Soru 1 -->
+                <div class="accordion-item border-bottom">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            {% trans "Ürünleriniz gerçek gümüş mü?" %}
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary">
+                            {% trans "Evet, tüm gümüş takılarımız 925 ayar gümüştür. Altın kaplama modellerimizde ise en kaliteli zirkon taşlar ve altın kaplama teknikleri kullanılır." %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soru 2 -->
+                <div class="accordion-item border-bottom">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            {% trans "Ürünler kararma yapar mı?" %}
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary">
+                            {% trans "Gümüş doğası gereği zamanla oksitlenebilir. Ancak ürünlerimizi kimyasallardan uzak tutarak ve düzenli bakım yaparak ömrünü uzatabilirsiniz." %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soru 3 -->
+                <div class="accordion-item border-bottom">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            {% trans "Değişim ve iade imkanı var mı?" %}
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary">
+                            {% trans "Hijyen kuralları gereği küpe grubunda iade kabul edilmemektedir. Diğer ürünlerde kullanılmamış olması şartıyla 14 gün içinde değişim yapabilirsiniz." %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="small text-muted">{% trans "Aradığınız cevabı bulamadınız mı?" %}</p>
+                <a href="https://wa.me/905426357990" class="btn btn-outline-dark rounded-0 px-4">{% trans "Bize WhatsApp'tan Yazın" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

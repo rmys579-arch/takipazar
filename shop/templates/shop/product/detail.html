@@ -1,16 +1,15 @@
 {% extends "shop/base.html" %}
-{% load static %}
+{% load static i18n %}
 
 {% block title %}{{ product.name }} - Takı Pazar{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <div class="row">
-        <!-- Sol Kolon: Ürün Görseli (Zoom Entegre Edildi) -->
+        <!-- Sol Kolon: Ürün Görseli (Büyüteç Entegreli) -->
         <div class="col-md-6 mb-4 text-center">
             <div class="card border-0 shadow-sm p-3">
                 {% if product.image %}
-                    <!-- id="product-zoom" ve data-zoom-image alanları büyüteç için eklendi -->
                     <img id="product-zoom" 
                          src="{{ product.image.url }}" 
                          data-zoom-image="{{ product.image.url }}" 
@@ -18,7 +17,7 @@
                          class="img-fluid rounded shadow-sm" 
                          style="max-height: 500px; object-fit: contain; cursor: crosshair;">
                 {% else %}
-                    <div class="bg-light text-center py-5">Görsel Yok</div>
+                    <div class="bg-light text-center py-5">{% trans "Görsel Yok" %}</div>
                 {% endif %}
             </div>
         </div>
@@ -28,13 +27,17 @@
             <!-- Breadcrumb (Navigasyon) -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb small">
-                    <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}" class="text-dark text-decoration-none">Mağaza</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'shop:product_list' %}" class="text-dark text-decoration-none">
+                            {% trans "Mağaza" %}
+                        </a>
+                    </li>
                     <li class="breadcrumb-item active">{{ product.category.name }}</li>
                 </ol>
             </nav>
 
             <h1 class="fw-bold mb-2 text-uppercase">{{ product.name }}</h1>
-            <p class="text-muted mb-4">{{ product.weight }} Gram | 925 Ayar Gümüş</p>
+            <p class="text-muted mb-4">{{ product.weight }} Gram | {% trans "925 Ayar Gümüş" %}</p>
             
             <div class="price-box mb-4">
                 <!-- Perakende Fiyat -->
@@ -43,13 +46,13 @@
                 <!-- Toptan Fiyat -->
                 <div class="wholesale-price d-none">
                     <h2 class="fw-bold text-primary mb-0">{{ product.price_wholesale }} TL</h2>
-                    <p class="text-danger small mt-1">* Toptan alımlarda minimum 5 adet zorunludur.</p>
+                    <p class="text-danger small mt-1">{% trans "* Toptan alımlarda minimum 5 adet zorunludur." %}</p>
                 </div>
                 
                 {% if product.stock > 0 %}
-                    <span class="badge bg-success mt-2">STOKTA VAR</span>
+                    <span class="badge bg-success mt-2">{% trans "STOKTA VAR" %}</span>
                 {% else %}
-                    <span class="badge bg-danger mt-2">STOKTA YOK</span>
+                    <span class="badge bg-danger mt-2">{% trans "STOKTA YOK" %}</span>
                 {% endif %}
             </div>
 
@@ -59,15 +62,14 @@
             <form action="{% url 'cart:cart_add' product.id %}" method="post">
                 {% csrf_token %}
                 
-                <!-- Backend için Mod Bilgisi -->
                 <input type="hidden" name="mode" id="current_mode_input" value="perakende">
 
                 <!-- Varyasyon Seçimi -->
                 {% if product.variations.all %}
                 <div class="mb-4">
-                    <label class="form-label fw-bold small text-uppercase">Seçenekler</label>
+                    <label class="form-label fw-bold small text-uppercase">{% trans "SEÇENEKLER" %}</label>
                     <select name="variation" class="form-select rounded-0" required>
-                        <option value="" selected disabled>Lütfen bir seçenek belirleyin</option>
+                        <option value="" selected disabled>{% trans "Lütfen bir seçenek belirleyin" %}</option>
                         {% for var in product.variations.all %}
                             <option value="{{ var.id }}">
                                 {{ var.name }}: {{ var.value }} 
@@ -81,13 +83,13 @@
                 <!-- Miktar ve Ekle Butonu -->
                 <div class="d-flex align-items-center gap-3">
                     <div style="width: 100px;">
-                        <label class="form-label small fw-bold text-uppercase">Adet</label>
+                        <label class="form-label small fw-bold text-uppercase">{% trans "ADET" %}</label>
                         <input type="number" id="qty_input" name="quantity" value="1" min="1" class="form-control rounded-0">
                     </div>
                     <div class="flex-grow-1">
                         <label class="form-label d-block opacity-0">Buton</label>
                         <button type="submit" class="btn btn-dark btn-lg w-100 rounded-0 fw-bold">
-                            SEPETE EKLE
+                            {% trans "SEPETE EKLE" %}
                         </button>
                     </div>
                 </div>
@@ -97,10 +99,10 @@
             <div class="mt-5 pt-4 border-top">
                 <div class="row g-3">
                     <div class="col-6 d-flex align-items-center gap-2 text-muted small">
-                        <i class="fa-solid fa-truck-fast text-dark"></i> 24 Saatte Kargoda
+                        <i class="fa-solid fa-truck-fast text-dark"></i> {% trans "24 Saatte Kargoda" %}
                     </div>
                     <div class="col-6 d-flex align-items-center gap-2 text-muted small">
-                        <i class="fa-solid fa-shield-halved text-dark"></i> Güvenli Ödeme
+                        <i class="fa-solid fa-shield-halved text-dark"></i> {% trans "Güvenli Ödeme" %}
                     </div>
                 </div>
             </div>
@@ -108,13 +110,13 @@
     </div>
 </div>
 
-<!-- JQuery ve ElevateZoom Kütüphaneleri -->
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/2.2.3/jquery.elevatezoom.min.js"></script>
 
 <script>
     $(document).ready(function() {
-        // 1. Büyüteç (Zoom) Aktif Etme
+        // Büyüteç Aktif Etme
         $("#product-zoom").elevateZoom({
             zoomType: "inner",
             cursor: "crosshair",
@@ -122,23 +124,20 @@
             zoomWindowFadeOut: 750
         });
 
-        // 2. Mod ve Fiyat Kontrolü (Toptan/Perakende)
+        // Mod ve Fiyat Kontrolü
         const mode = localStorage.getItem('displayMode') || 'perakende';
         const qtyInput = document.getElementById('qty_input');
         const modeInput = document.getElementById('current_mode_input');
         
-        if (modeInput) {
-            modeInput.value = mode;
-        }
+        if (modeInput) modeInput.value = mode;
         
         if (mode === 'toptan') {
             if (qtyInput) {
                 qtyInput.value = 5;
                 qtyInput.min = 5;
             }
-            // Fiyat görünümlerini değiştir
-            document.querySelectorAll('.wholesale-price').forEach(el => el.classList.remove('d-none'));
-            document.querySelectorAll('.retail-price').forEach(el => el.classList.add('d-none'));
+            $('.wholesale-price').removeClass('d-none');
+            $('.retail-price').addClass('d-none');
         }
     });
 </script>

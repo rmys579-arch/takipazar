@@ -2,20 +2,25 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import Order, Category, Product, Variation
 
-# Karakter temizleyici (DHL ve global sistemler için)
+# Karakter temizleyici (DHL ve global sistemler için) aynı kalıyor
 def turkish_to_english(text):
     if not text:
         return ""
-    # Sol taraf (Türkçe): 12 karakter | Sağ taraf (İngilizce): 12 karakter
-    tr_chars = "ğĞçÇşŞüÜöÖıİ"
-    en_chars = "gGcC sSuUoOiI"
-    
-    # Not: Eğer hata devam ederse alttaki daha güvenli listeyi kullan:
     chars = str.maketrans("ğĞçÇşŞüÜöÖıİ", "gGcCsSuUoOiI") 
     return text.translate(chars)
+
+# --- YENİ: Varyasyon Tablosu Yapısı ---
+class VariationInline(admin.TabularInline):
+    model = Variation
+    extra = 1
+    verbose_name = "Varyasyon"
+    verbose_name_plural = "Varyasyonlar"
+    # Modelindeki alan isimlerine göre burayı güncelledim
+    # Eğer hata alırsan fields satırını tamamen silebilirsin
+    fields = ['name', 'value', 'extra_price'] 
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    # Sadece veritabanında olduğundan emin olduğumuz alanlar
     list_display = ['order_number', 'first_name', 'last_name', 'city', 'status', 'total_paid', 'dhl_label_button']
     
     def dhl_label_button(self, obj):
@@ -44,15 +49,16 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    # En temel ürün alanları
-    list_display = ['name', 'price_retail', 'stock']
+    # Ürün listesi daha detaylı olsun
+    list_display = ['name', 'price_retail', 'stock', 'category']
+    # İŞTE SİHİRLİ DOKUNUŞ: Varyasyonları ürünün içine gömdük
+    inlines = [VariationInline]
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
-
-@admin.register(Variation)
-class VariationAdmin(admin.ModelAdmin):
-    # Hata veren 'variation_category', 'variation_value' vb. alanları kaldırdık
-    # Sadece 'product' alanını bıraktık (Modelinde mutlaka vardır)
-    list_display = ['product']
+    def get_model_perms(self, request):
+        return super().get_model_perms(request)
+# --- DİKKAT ---
+# VariationAdmin'i sildik çünkü artık ProductAdmin içinde Inline olarak görünüyor.
+# Ayrı bir sayfada tek başına görünmesine gerek kalmadı.

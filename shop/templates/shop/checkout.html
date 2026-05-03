@@ -1,7 +1,7 @@
 {% extends "shop/base.html" %}
-{% load static %}
+{% load i18n static %}
 
-{% block title %}Ödeme - Takı Pazar{% endblock %}
+{% block title %}{% trans "Ödeme" %} - Takı Pazar{% endblock %}
 
 {% block content %}
 <div class="container mt-5 mb-5">
@@ -9,11 +9,11 @@
         <!-- SOL KOLON: Müşteri ve Teslimat Bilgileri -->
         <div class="col-md-7">
             <div class="card shadow-sm border-0 p-4" style="border-radius: 15px; background-color: #fcfcfc;">
-                <h2 class="text-center mb-4" style="font-weight: 600; color: #333;">Teslimat Bilgileri</h2>
+                <h2 class="text-center mb-4" style="font-weight: 600; color: #333;">{% trans "Teslimat Bilgileri" %}</h2>
                 
                 <!-- HATA MESAJI GÖSTERİMİ -->
                 {% if error_message %}
-                <div class="alert alert-danger border-0 shadow-sm mb-4" style="border-radius: 10px; background-color: #f8d7da; color: #842029;"">
+                <div class="alert alert-danger border-0 shadow-sm mb-4" style="border-radius: 10px; background-color: #f8d7da; color: #842029;">
                     <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ error_message }}
                 </div>
                 {% endif %}
@@ -24,45 +24,44 @@
                     <div class="row g-3">
                         <!-- İsim - Soyisim -->
                         <div class="col-6">
-                            <label class="form-label small text-muted">Adınız</label>
+                            <label class="form-label small text-muted">{% trans "Adınız" %}</label>
                             {{ form.first_name }}
                         </div>
                         <div class="col-6">
-                            <label class="form-label small text-muted">Soyadınız</label>
+                            <label class="form-label small text-muted">{% trans "Soyadınız" %}</label>
                             {{ form.last_name }}
                         </div>
 
                         <!-- Adres -->
                         <div class="col-12">
-                            <label class="form-label small text-muted">Tam Adres</label>
+                            <label class="form-label small text-muted">{% trans "Tam Adres" %}</label>
                             {{ form.address }}
                         </div>
 
                         <!-- Şehir - Posta Kodu - Ülke -->
                         <div class="col-4">
-                            <label class="form-label small text-muted">Şehir</label>
+                            <label class="form-label small text-muted">{% trans "Şehir" %}</label>
                             {{ form.city }}
                         </div>
                         <div class="col-4">
-                            <label class="form-label small text-muted">Posta Kodu</label>
+                            <label class="form-label small text-muted">{% trans "Posta Kodu" %}</label>
                             {{ form.zip_code }}
                         </div>
                         <div class="col-4">
-                            <label class="form-label small text-muted">Ülke</label>
+                            <label class="form-label small text-muted">{% trans "Ülke" %}</label>
                             {{ form.country }}
                         </div>
 
                         <!-- İletişim -->
                         <div class="col-12">
-                            <label class="form-label small text-muted">E-posta</label>
+                            <label class="form-label small text-muted">{% trans "E-posta" %}</label>
                             {{ form.email }}
                         </div>
 
-                        <!-- Telefon Numarası ve Ülke Kodu Bloğu -->
+                        <!-- Telefon Numarası -->
                         <div class="col-12">
-                            <label class="form-label small text-muted">Telefon Numarası</label>
+                            <label class="form-label small text-muted">{% trans "Telefon Numarası" %}</label>
                             <div class="input-group">
-                                <!-- Ülke Kodu Seçimi -->
                                 <select name="country_code" class="form-select bg-light" style="max-width: 110px; border-radius: 8px 0 0 8px !important; border: 1px solid #ddd; font-weight: 600; font-size: 0.9rem;">
                                     <option value="TR" selected>TR (+90)</option>
                                     <option value="US">US (+1)</option>
@@ -73,40 +72,59 @@
                             </div>
                         </div>
 
+                        <!-- Hediye Paketi Bölümü -->
+                        <div class="col-12 mt-4">
+                            <div class="p-3 border rounded" style="background-color: #f8f9fa; border-style: dashed !important; border-color: #dee2e6 !important;">
+                                <h6 class="fw-bold mb-3"><i class="fa-solid fa-gift me-2 text-danger"></i>{% trans "Hediye Paketi Seçenekleri" %}</h6>
+                                
+                                <div class="form-check mb-3">
+                                    {{ form.gift_wrap }}
+                                    <label class="form-check-label ms-2" for="{{ form.gift_wrap.id_for_label }}">
+                                        {% trans "Bu sipariş hediye paketinde hazırlansın." %}
+                                    </label>
+                                </div>
+
+                                <div class="gift-note-area">
+                                    <label class="form-label small text-muted">{% trans "Hediye Notunuz (İsteğe Bağlı)" %}</label>
+                                    {{ form.gift_note }}
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Ödeme Yöntemi -->
                         <div class="col-12 mt-4 pt-3 border-top">
-                            <h5 class="fw-bold mb-3">Ödeme Yöntemi</h5>
+                            <h5 class="fw-bold mb-3">{% trans "Ödeme Yöntemi" %}</h5>
                             
                             <div class="form-check p-3 border rounded mb-2" style="background: #fff;">
                                 <input id="kapida_odeme" name="payment_method" type="radio" class="form-check-input" value="kapida_odeme" checked required>
                                 <label class="form-check-label fw-bold" for="kapida_odeme">
-                                    <i class="fa-solid fa-hand-holding-dollar me-2"></i> Kapıda Nakit / Kart ile Ödeme
+                                    <i class="fa-solid fa-hand-holding-dollar me-2"></i> {% trans "Kapıda Nakit / Kart ile Ödeme" %}
                                 </label>
                             </div>
 
                             <div class="form-check p-3 border rounded mb-3" style="background: #fff;">
                                 <input id="kart_odeme" name="payment_method" type="radio" class="form-check-input" value="kart" required>
                                 <label class="form-check-label fw-bold" for="kart_odeme">
-                                    <i class="fa-solid fa-credit-card me-2"></i> Kredi / Banka Kartı
+                                    <i class="fa-solid fa-credit-card me-2"></i> {% trans "Kredi / Banka Kartı" %}
                                 </label>
                             </div>
 
                             <div id="card_details" class="p-3 bg-white border rounded mb-3 d-none">
                                 <div class="row g-2">
                                     <div class="col-12">
-                                        <label class="form-label small text-muted">Kart Sahibi</label>
-                                        <input type="text" name="card_name" class="form-control rounded-0" placeholder="Kart Üzerindeki İsim">
+                                        <label class="form-label small text-muted">{% trans "Kart Sahibi" %}</label>
+                                        <input type="text" name="card_name" class="form-control rounded-0" placeholder="{% trans 'Kart Üzerindeki İsim' %}">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label small text-muted">Kart Numarası</label>
+                                        <label class="form-label small text-muted">{% trans "Kart Numarası" %}</label>
                                         <input type="text" name="card_number" class="form-control rounded-0" placeholder="0000 0000 0000 0000">
                                     </div>
                                     <div class="col-6">
-                                        <label class="form-label small text-muted">Ay (AA)</label>
+                                        <label class="form-label small text-muted">{% trans "Ay (AA)" %}</label>
                                         <input type="text" name="expire_month" class="form-control rounded-0" placeholder="Örn: 05">
                                     </div>
                                     <div class="col-6">
-                                        <label class="form-label small text-muted">Yıl (YY)</label>
+                                        <label class="form-label small text-muted">{% trans "Yıl (YY)" %}</label>
                                         <input type="text" name="expire_year" class="form-control rounded-0" placeholder="Örn: 2028">
                                     </div>
                                     <div class="col-12">
@@ -119,7 +137,7 @@
 
                         <div class="col-12 mt-2">
                             <button type="submit" class="btn btn-dark w-100 py-3 fw-bold" style="border-radius: 10px; letter-spacing: 1px;">
-                                SİPARİŞİ TAMAMLA
+                                {% trans "SİPARİŞİ TAMAMLA" %}
                             </button>
                         </div>
                     </div>
@@ -131,21 +149,21 @@
         <div class="col-md-5">
             <div class="card border-0 bg-light p-4 shadow-sm" style="border-radius: 15px;">
                 <h4 class="d-flex justify-content-between align-items-center mb-4">
-                    <span class="fw-bold">SEPET ÖZETİ</span>
-                    <span class="badge bg-dark rounded-pill">{{ cart|length }} Ürün</span>
+                    <span class="fw-bold">{% trans "SEPET ÖZETİ" %}</span>
+                    <span class="badge bg-dark rounded-pill">{{ cart|length }} {% trans "Ürün" %}</span>
                 </h4>
                 <ul class="list-group list-group-flush mb-3">
                     {% for item in cart %}
                     <li class="list-group-item d-flex justify-content-between lh-sm bg-transparent px-0 border-bottom">
                         <div>
                             <h6 class="my-0 fw-bold">{{ item.product.name }}</h6>
-                            <small class="text-muted">{{ item.quantity }} adet x {{ item.price }} TL</small>
+                            <small class="text-muted">{{ item.quantity }} {% trans "adet" %} x {{ item.price }} TL</small>
                         </div>
                         <span class="fw-bold">{{ item.total_price }} TL</span>
                     </li>
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between bg-transparent px-0 mt-3">
-                        <span class="h5 fw-bold">TOPLAM</span>
+                        <span class="h5 fw-bold">{% trans "TOPLAM" %}</span>
                         <strong class="h4 fw-bold text-primary">{{ cart.get_total_price }} TL</strong>
                     </li>
                 </ul>
@@ -186,6 +204,10 @@
     }
     #id_phone {
         border-radius: 0 8px 8px 0 !important;
+    }
+    #id_gift_wrap {
+        width: auto !important;
+        margin-top: 0.3rem;
     }
 </style>
 {% endblock %}
