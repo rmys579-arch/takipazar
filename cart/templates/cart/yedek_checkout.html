@@ -1,0 +1,75 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="fw-bold mb-4">TESLİMAT BİLGİLERİ</h4>
+            <form method="post" id="checkout-form">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label class="form-label">Ad</label>
+                        <input type="text" name="first_name" class="form-control rounded-0" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Soyad</label>
+                        <input type="text" name="last_name" class="form-control rounded-0" required>
+                    </div>
+
+                    <!-- E-posta Adresi Entegrasyonu -->
+                    <div class="col-12">
+                        <label class="form-label">E-posta Adresi</label>
+                        <input type="email" name="email" class="form-control rounded-0" value="{{ request.user.email }}" required>
+                        <small class="text-muted">Sipariş takibi için hesabınıza kayıtlı e-posta adresini kullanın.</small>
+                    </div>
+                    
+                    <div class="col-12">
+                        <label class="form-label">Telefon</label>
+                        <div class="input-group">
+                            <select name="country_code" class="form-select rounded-0" style="max-width: 120px;">
+                                <option value="+90">TR (+90)</option>
+                                <option value="+1">US (+1)</option>
+                                <option value="+44">UK (+44)</option>
+                                <option value="+49">DE (+49)</option>
+                            </select>
+                            <input type="tel" name="phone" class="form-control rounded-0" placeholder="5XX XXX XX XX" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Adres</label>
+                        <textarea name="address" class="form-control rounded-0" rows="4" required></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark btn-lg w-100 rounded-0 mt-4">SİPARİŞİ ONAYLA</button>
+            </form>
+        </div>
+        
+        <!-- Sağ tarafta sepet özeti -->
+        <div class="col-md-4">
+            <div class="card bg-light border-0 p-4 rounded-0">
+                <h5 class="fw-bold">Sipariş Özeti</h5>
+                <hr>
+                <h4 class="fw-bold">Toplam: {{ cart.get_total_price }} TL</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<div class="checkout-form">
+    <h3>Teslimat Bilgileri</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.first_name }}
+        {{ form.last_name }}
+        {{ form.address }}
+        <div class="row">
+            <div class="col-4">{{ form.city }}</div>
+            <div class="col-4">{{ form.zip_code }}</div>
+            <div class="col-4">{{ form.country }}</div>
+        </div>
+        {{ form.phone }}
+        {{ form.email }}
+        <button type="submit">Ödemeye Geç</button>
+    </form>
+</div>

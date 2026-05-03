@@ -1,0 +1,84 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Profilim - Takı Pazar{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Sol Taraf: İletişim ve Profil Bilgileri -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm p-4 text-center rounded-0">
+                <div class="mb-3">
+                    <!-- İstediğin Profil İşareti -->
+                    <i class="fa-solid fa-circle-user fa-6x text-dark"></i>
+                </div>
+                <h4 class="fw-bold mb-1">{{ request.user.username|upper }}</h4>
+                <p class="badge bg-dark mb-4">Üye</p>
+                
+                <div class="text-start">
+                    <h6 class="fw-bold text-uppercase small border-bottom pb-2">İletişim Bilgileri</h6>
+                    <p class="mb-1"><strong>E-posta:</strong> {{ request.user.email }}</p>
+                    <p class="mb-1"><strong>Kullanıcı Adı:</strong> @{{ request.user.username }}</p>
+                    <!-- Telefon numarası modelde user'a bağlıysa buraya eklenebilir -->
+                </div>
+                
+                <hr>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'shop:logout' %}" class="btn btn-outline-danger rounded-0 btn-sm">GÜVENLİ ÇIKIŞ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Sipariş Takibi -->
+        <div class="col-md-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="fa-solid fa-box-open fa-2x me-3"></i>
+                <h4 class="fw-bold mb-0 text-uppercase" style="letter-spacing: 1px;">Sipariş Takibi</h4>
+            </div>
+            
+            {% if orders %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle border bg-white">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>TAKİP NO</th>
+                                <th>TARİH</th>
+                                <th>TOPLAM TUTAR</th>
+                                <th>DURUM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td class="fw-bold text-primary">{{ order.order_number }}</td>
+                                <td>{{ order.created|date:"d.m.Y" }}</td>
+                                <td>{{ order.total_paid }} TL</td>
+                                <td>
+                                    {% if order.status == 'Hazırlanıyor' %}
+                                        <span class="badge bg-warning text-dark px-3 py-2"><i class="fa-solid fa-spinner fa-spin me-1"></i> {{ order.status|upper }}</span>
+                                    {% elif order.status == 'Kargoya Verildi' %}
+                                        <span class="badge bg-info text-white px-3 py-2"><i class="fa-solid fa-truck me-1"></i> {{ order.status|upper }}</span>
+                                    {% elif order.status == 'Teslim Edildi' %}
+                                        <span class="badge bg-success px-3 py-2"><i class="fa-solid fa-check-double me-1"></i> {{ order.status|upper }}</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary px-3 py-2">{{ order.status|upper }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="card border-0 shadow-sm text-center py-5 rounded-0">
+                    <i class="fa-solid fa-receipt fa-3x mb-3 text-muted"></i>
+                    <p class="text-muted">Henüz kayıtlı bir siparişiniz bulunmamaktadır.</p>
+                    <div class="mt-2">
+                        <a href="{% url 'shop:product_list' %}" class="btn btn-dark rounded-0 px-4">ALIŞVERİŞE BAŞLA</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

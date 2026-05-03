@@ -1,0 +1,129 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Alışveriş Sepetim{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="fw-bold mb-4 text-uppercase">Alışveriş Sepetim</h2>
+    
+    {% if cart %}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Ürün</th>
+                    <th class="text-center">Adet</th>
+                    <th>Birim Fiyat</th>
+                    <th>Toplam</th>
+                    <th class="text-end">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                    {% with product=item.product %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" style="width: 60px; height: 60px; object-fit: contain;" class="me-3 border rounded">
+                                {% endif %}
+                                <div>
+                                    <h6 class="mb-0 fw-bold">{{ product.name|upper }}</h6>
+                                    <small class="badge bg-secondary text-uppercase" style="font-size: 0.6rem;">{{ item.mode }} Satış</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 150px;">
+                            <div class="d-flex align-items-center justify-content-center gap-2">
+                                <!-- Miktar Azaltma Formu -->
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="m-0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="quantity" value="-1">
+                                    <input type="hidden" name="mode" value="{{ item.mode }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-dark rounded-circle" 
+                                        {% if item.mode == 'toptan' and item.quantity <= 5 %}disabled{% elif item.quantity <= 1 %}disabled{% endif %}
+                                        style="width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fa-solid fa-minus small"></i>
+                                    </button>
+                                </form>
+
+                                <span class="fw-bold fs-5 px-2" style="min-width: 35px; text-align: center;">{{ item.quantity }}</span>
+
+                                <!-- Miktar Artırma Formu -->
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="m-0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="mode" value="{{ item.mode }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-dark rounded-circle" 
+                                        style="width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fa-solid fa-plus small"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>{{ item.price }} TL</td>
+                        <td class="fw-bold text-dark">{{ item.total_price }} TL</td>
+                        <td class="text-end">
+                            <a href="{% url 'cart:cart_remove' product.id %}" class="btn btn-link text-danger p-0" title="Ürünü Kaldır">
+                                <i class="fa-solid fa-trash-can fa-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endwith %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mt-5 pb-5">
+        <div class="col-md-6 order-2 order-md-1 mt-4 mt-md-0">
+            <a href="{% url 'shop:product_list' %}" class="btn btn-outline-dark rounded-0 px-4">
+                <i class="fa-solid fa-arrow-left me-2"></i> Alışverişe Devam Et
+            </a>
+        </div>
+        <div class="col-md-6 order-1 order-md-2 text-md-end">
+            <div class="card border-0 bg-light p-4 rounded-0">
+                <h5 class="text-muted mb-3 text-uppercase" style="letter-spacing: 1px;">Özet</h5>
+                <h3 class="fw-bold mb-4">Genel Toplam: <span class="text-primary">{{ cart.get_total_price }} TL</span></h3>
+                
+               <!-- Eski hatalı kısmı tamamen sil ve sadece bunu bırak -->
+            <div class="text-end">
+               <a href="{% url 'shop:order_create' %}" class="btn btn-primary">
+                  Ödemeye Geç <i class="fa-solid fa-chevron-right ms-2"></i>
+                </a>
+            </div> 
+        </div>
+    </div>
+    
+    {% else %}
+    <!-- Boş Sepet Görünümü -->
+    <div class="text-center py-5">
+        <div class="mb-4">
+            <i class="fa-solid fa-basket-shopping fa-5x text-light-emphasis"></i>
+        </div>
+        <h4 class="fw-bold">Sepetiniz şu an boş.</h4>
+        <p class="text-muted">Görünüşe göre henüz bir ürün eklemediniz.</p>
+        <a href="{% url 'shop:product_list' %}" class="btn btn-dark mt-3 rounded-0 px-5 py-2">
+            Ürünleri Keşfet
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .table tbody tr:hover {
+        background-color: #fafafa;
+        transition: 0.2s;
+    }
+    .btn-outline-dark:active {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+    /* Chrome, Safari, Edge, Opera için input oklarını gizleme */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+</style>
+{% endblock %}

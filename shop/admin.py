@@ -1,0 +1,58 @@
+from django.contrib import admin
+from django.utils.html import format_html
+from .models import Order, Category, Product, Variation
+
+# Karakter temizleyici (DHL ve global sistemler için)
+def turkish_to_english(text):
+    if not text:
+        return ""
+    # Sol taraf (Türkçe): 12 karakter | Sağ taraf (İngilizce): 12 karakter
+    tr_chars = "ğĞçÇşŞüÜöÖıİ"
+    en_chars = "gGcC sSuUoOiI"
+    
+    # Not: Eğer hata devam ederse alttaki daha güvenli listeyi kullan:
+    chars = str.maketrans("ğĞçÇşŞüÜöÖıİ", "gGcCsSuUoOiI") 
+    return text.translate(chars)
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    # Sadece veritabanında olduğundan emin olduğumuz alanlar
+    list_display = ['order_number', 'first_name', 'last_name', 'city', 'status', 'total_paid', 'dhl_label_button']
+    
+    def dhl_label_button(self, obj):
+        label_title = "TAKI PAZAR"
+        customer_name = turkish_to_english(f"{obj.first_name} {obj.last_name}")
+        clean_address = turkish_to_english(obj.address)
+        clean_city = turkish_to_english(obj.city)
+        barcode_url = f"https://bwipjs-api.metafloor.com/?bcid=code128&text={obj.order_number}&scale=2&includetext"
+        
+        label_content = f"""
+        <div style='font-family:Arial; width:300px; border:2px solid #000; padding:15px; color:#000;'>
+            <div style='text-align:center; border-bottom:1px solid #000; margin-bottom:10px;'>
+                <h3>{label_title}</h3>
+                <small>INTERNATIONAL SHIPPING</small>
+            </div>
+            <p><strong>TO:</strong> {customer_name}</p>
+            <p><strong>ADDR:</strong> {clean_address}</p>
+            <p><strong>CITY:</strong> {clean_city} / {obj.zip_code}</p>
+            <p><strong>COUNTRY:</strong> {obj.country.upper()}</p>
+            <p><strong>TEL:</strong> {obj.phone}</p>
+            <hr>
+            <div style='text-align:center;'><img src='{barcode_url}' style='width:100%'><p>No: {obj.order_number}</p></div>
+        </div>
+        """
+        return format_html('''<a class="button" style="background-color:#d40511; color:white; padding:5px 10px; border-radius:4px; cursor:pointer;" onclick="var win = window.open('', '', 'width=400,height=600'); win.document.write('<html><body>' + `{}` + '</body></html>'); win.document.close(); setTimeout(function(){{ win.print(); }}, 500);">DHL Etiketi</a>''', label_content)
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    # En temel ürün alanları
+    list_display = ['name', 'price_retail', 'stock']
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+@admin.register(Variation)
+class VariationAdmin(admin.ModelAdmin):
+    # Hata veren 'variation_category', 'variation_value' vb. alanları kaldırdık
+    # Sadece 'product' alanını bıraktık (Modelinde mutlaka vardır)
+    list_display = ['product']

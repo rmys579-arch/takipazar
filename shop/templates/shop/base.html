@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Takı Pazar{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --main-white: #ffffff;
+            --main-black: #000000;
+        }
+
+        body { 
+            background-color: var(--main-white); 
+            color: var(--main-black); 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .header-container { 
+            padding: 15px 0; 
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .selection-group {
+            display: flex;
+            border: 1px solid var(--main-black);
+            overflow: hidden;
+            background-color: var(--main-white);
+        }
+
+        .btn-choice {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-choice.active {
+            background-color: var(--main-black);
+            color: var(--main-white) !important;
+        }
+
+        .btn-choice.passive {
+            background-color: var(--main-white);
+            color: var(--main-black) !important;
+        }
+
+        .logo-img {
+            max-height: 65px;
+            width: auto;
+        }
+
+        /* Arama Kutusu (Desktop) */
+        .search-box {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--main-black);
+            padding: 2px 5px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 0.8rem;
+            width: 100px;
+            transition: width 0.4s ease-in-out;
+            background: transparent;
+        }
+
+        .search-input:focus { width: 150px; }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--main-black);
+        }
+
+        /* Offcanvas Sidebar Tasarımı */
+        .offcanvas { width: 300px !important; }
+        .nav-link { 
+            color: var(--main-black) !important; 
+            font-weight: 500;
+            padding: 12px 0 !important;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        .nav-link:hover { color: #666 !important; }
+        .category-header {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #999;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    {% load static %}
+
+    <!-- Header -->
+    <header class="header-container sticky-top bg-white">
+        <div class="container-fluid px-4">
+            <div class="row align-items-center">
+                
+                <!-- SOL: Menü Butonu (Hamburger) -->
+                <div class="col-2 col-md-4">
+                    <button class="btn border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                        <i class="fa-solid fa-bars fa-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- ORTA: Logo -->
+                <div class="col-4 col-md-4 text-center">
+                    <a href="{% url 'shop:product_list' %}" class="text-decoration-none">
+                        <img src="{% static 'img/logo.png' %}" alt="TAKIPAZAR" class="logo-img">
+                    </a>
+                </div>
+
+                <!-- SAĞ: Ara, Mod, Dil ve Kullanıcı -->
+                <div class="col-6 col-md-4 d-flex justify-content-end align-items-center gap-2">
+                    <!-- Desktop Arama -->
+                    <form action="{% url 'shop:product_list' %}" method="get" class="d-none d-md-flex align-items-center me-2">
+                        <div class="search-box">
+                            <input type="text" name="q" class="search-input" placeholder="Ara..." value="{{ request.GET.q|default:'' }}">
+                            <button type="submit" class="search-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Satış Modu -->
+                    <div class="selection-group d-none d-lg-flex">
+                        <button onclick="setMode('toptan')" id="btn-toptan" class="btn-choice passive">Toptan📦</button>
+                        <button onclick="setMode('perakende')" id="btn-perakende" class="btn-choice active">Perakende🛍️</button>
+                    </div>
+
+                    <!-- Dil Seçimi -->
+                    <div class="selection-group">
+                        <button onclick="setLang('tr')" id="btn-tr" class="btn-choice active">TR🇹🇷</button>
+                        <button onclick="setLang('en')" id="btn-en" class="btn-choice passive">EN🇺🇸</button>
+                    </div>
+
+                    <!-- İkonlar -->
+                    <div class="ms-2 d-flex align-items-center gap-3">
+                        <a href="{% url 'cart:cart_detail' %}" class="text-dark position-relative">
+                            <i class="fa-solid fa-basket-shopping fa-lg"></i>
+                            {% with total_items=cart|length %}
+                                {% if total_items > 0 %}
+                                    <span class="badge bg-dark rounded-circle position-absolute" style="font-size: 0.6rem; top: -8px; right: -8px;">{{ total_items }}</span>
+                                {% endif %}
+                            {% endwith %}
+                        </a>
+                        
+                        {% if user.is_authenticated %}
+                            <div class="dropdown">
+                                <a class="text-dark text-decoration-none dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-circle-user fa-xl"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end rounded-0 border-0 shadow mt-3">
+                                    <li><a class="dropdown-item py-2" href="{% url 'shop:profile' %}">Sipariş Takibi</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item py-2 text-danger" href="{% url 'shop:logout' %}">Çıkış Yap</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'shop:login' %}" class="text-dark"><i class="fa-solid fa-user"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Yan Menü (Offcanvas Sidebar) - GÜNCELLENMİŞ KOLEKSİYON ODAKLI YAPI -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold">TAKİ PAZAR</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav flex-grow-1">
+                <!-- Arama Çubuğu -->
+                <li class="nav-item mb-4">
+                    <form action="{% url 'shop:product_list' %}" method="get" class="d-flex">
+                        <input type="text" name="q" class="form-control rounded-0 border-dark" placeholder="Ürün ara..." value="{{ request.GET.q|default:'' }}">
+                        <button type="submit" class="btn btn-dark rounded-0 px-3">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </li>
+
+                <!-- Kategoriler Başlığı -->
+                <li class="category-header fw-bold text-uppercase mb-2" style="font-size: 0.7rem; letter-spacing: 1px; color: #999;">Koleksiyonlar</li>
+
+                <!-- Tüm Ürünler -->
+                <li class="nav-item">
+                    <a class="nav-link {% if not category %}fw-bold text-dark{% endif %}" href="{% url 'shop:product_list' %}" style="color: black !important; text-decoration: none; display: block; padding: 10px 0; border-bottom: 1px solid #f8f9fa;">
+                        Tüm Ürünler
+                    </a>
+                </li>
+
+                <!-- Dinamik Kategoriler (Yüzük, Küpe, Kolye, Bileklik, Set vb.) -->
+                {% for c in categories %}
+                <li class="nav-item">
+                    <a class="nav-link {% if category.slug == c.slug %}fw-bold text-dark{% endif %}" href="{{ c.get_absolute_url }}" style="color: black !important; text-decoration: none; display: block; padding: 10px 0; border-bottom: 1px solid #f8f9fa;">
+                        {{ c.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <main class="container-fluid px-4 mt-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentMode = localStorage.getItem('displayMode') || 'perakende';
+            const currentLang = localStorage.getItem('displayLang') || 'tr';
+            applyMode(currentMode);
+            applyLang(currentLang);
+        });
+
+        function setMode(mode) { localStorage.setItem('displayMode', mode); location.reload(); }
+        function applyMode(mode) {
+            document.body.classList.add(mode + '-mod');
+            const bT = document.getElementById('btn-toptan');
+            const bP = document.getElementById('btn-perakende');
+            if (bT && bP) {
+                if (mode === 'toptan') { bT.classList.replace('passive', 'active'); bP.classList.replace('active', 'passive'); }
+                else { bP.classList.replace('passive', 'active'); bT.classList.replace('active', 'passive'); }
+            }
+        }
+
+        function setLang(lang) { localStorage.setItem('displayLang', lang); location.reload(); }
+        function applyLang(lang) {
+            document.body.classList.add('lang-' + lang);
+            const bTr = document.getElementById('btn-tr');
+            const bEn = document.getElementById('btn-en');
+            if (bTr && bEn) {
+                if (lang === 'tr') { bTr.classList.replace('passive', 'active'); bEn.classList.replace('active', 'passive'); }
+                else { bEn.classList.replace('passive', 'active'); bTr.classList.replace('active', 'passive'); }
+            }
+        }
+    </script>
+</body>
+</html>
