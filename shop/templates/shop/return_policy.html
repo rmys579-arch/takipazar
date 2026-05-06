@@ -1,16 +1,17 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container py-5" style="margin-top: 100px;">
-    <h1 class="mb-4">İade ve Değişim Koşulları</h1>
+    <h1 class="mb-4">{% trans "İade ve Değişim Koşulları" %}</h1>
     <div class="card shadow-sm p-4">
-        <p>Gümüş projelerimizde müşteri memnuniyeti esastır. Satın aldığınız ürünleri aşağıdaki koşullarda iade edebilirsiniz:</p>
+        <p>{% trans "Gümüş projelerimizde müşteri memnuniyeti esastır. Satın aldığınız ürünleri aşağıdaki koşullarda iade edebilirsiniz:" %}</p>
         <ul>
-            <li>Ürünün teslim tarihinden itibaren 14 gün içerisinde iade hakkınız mevcuttur.</li>
-            <li>İade edilecek ürünün kullanılmamış ve orijinal ambalajında olması gerekmektedir.</li>
-            <li>Kişiye özel tasarlanan veya üzerinde değişiklik yapılan ürünlerde iade kabul edilmemektedir.</li>
+            <li>{% trans "Ürünün teslim tarihinden itibaren 14 gün içerisinde iade hakkınız mevcuttur." %}</li>
+            <li>{% trans "İade edilecek ürünün kullanılmamış ve orijinal ambalajında olması gerekmektedir." %}</li>
+            <li>{% trans "Kişiye özel tasarlanan veya üzerinde değişiklik yapılan ürünlerde iade kabul edilmemektedir." %}</li>
         </ul>
-        <p>Sorularınız için bizimle iletişime geçebilirsiniz.</p>
+        <p>{% trans "Sorularınız için bizimle iletişime geçebilirsiniz." %}</p>
     </div>
 </div>
 {% endblock %}

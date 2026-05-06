@@ -592,3 +592,39 @@ msgstr "Zircon and Gold Plated Elegance"
 
 msgid "Toptan alımlarda minimum 5 adet zorunludur"
 msgstr "Minimum 5 pieces are mandatory for wholesale purchases"
+
+msgid "İade ve Değişim Koşulları"
+msgstr "Return and Exchange Policy"
+
+msgid "Gümüş projelerimizde müşteri memnuniyeti esastır. Satın aldığınız ürünleri aşağıdaki koşullarda iade edebilirsiniz:"
+msgstr "Customer satisfaction is essential in our silver projects. You can return the products you have purchased under the following conditions:"
+
+msgid "Ürünün teslim tarihinden itibaren 14 gün içerisinde iade hakkınız mevcuttur."
+msgstr "You have the right to return within 14 days from the date of delivery of the product."
+
+msgid "İade edilecek ürünün kullanılmamış ve orijinal ambalajında olması gerekmektedir."
+msgstr "The product to be returned must be unused and in its original packaging."
+
+msgid "Kişiye özel tasarlanan veya üzerinde değişiklik yapılan ürünlerde iade kabul edilmemektedir."
+msgstr "Returns are not accepted for products that are specially designed or modified."
+
+msgid "Sorularınız için bizimle iletişime geçebilirsiniz."
+msgstr "You can contact us for your questions."
+
+msgid "Sipariş Özeti"
+msgstr "Order Summary"
+
+msgid "Ürün"
+msgstr "Product"
+
+msgid "Adet"
+msgstr "Quantity"
+
+msgid "Fiyat"
+msgstr "Price"
+
+msgid "Toplam"
+msgstr "Total"
+
+msgid "Ödemeyi Tamamla"
+msgstr "Complete Payment"
