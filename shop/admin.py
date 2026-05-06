@@ -1,6 +1,6 @@
+from import_export.admin import ImportExportModelAdmin # Yeni eklendi
 from django.contrib import admin
 from django.utils.html import format_html
-from import_export.admin import ImportExportModelAdmin # Yeni eklendi
 from import_export import resources # Yeni eklendi
 from .models import Order, Category, Product, Variation
 
@@ -61,7 +61,11 @@ class ProductAdmin(ImportExportModelAdmin):
     resource_class = ProductResource # Excel şablonunu bağladık
     list_display = ['name', 'price_retail', 'stock', 'category']
     inlines = [VariationInline]
-
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="width:50px; height:50px; border-radius:5px;" />', obj.image.url)
+        return "Görsel Yok"
+    image_tag.short_description = 'Ürün Görseli'
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']

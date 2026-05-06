@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 23:42+0300\n"
+"POT-Creation-Date: 2026-05-06 21:32+0300\n"
 "PO-Revision-Date: 2026-05-03 16:30+0300\n"
 "Last-Translator: Rumeysa <email@address.com>\n"
 "Language-Team: English\n"
@@ -84,11 +84,11 @@ msgstr ""
 msgid "Ürünleri Keşfet"
 msgstr ""
 
-#: gumus_projesi/settings.py:93
+#: gumus_projesi/settings.py:94
 msgid "Turkish"
 msgstr "Turkish"
 
-#: gumus_projesi/settings.py:94
+#: gumus_projesi/settings.py:95
 msgid "English"
 msgstr "English"
 
@@ -118,31 +118,31 @@ msgstr "Address"
 msgid "Şehir"
 msgstr "City"
 
-#: shop/models.py:8
+#: shop/models.py:9
 msgid "Kategori Adı"
 msgstr "Category Name"
 
-#: shop/models.py:20
+#: shop/models.py:25
 msgid "Ürün Adı"
 msgstr "Product Name"
 
-#: shop/models.py:21
+#: shop/models.py:26
 msgid "Açıklama"
 msgstr "Description"
 
-#: shop/models.py:24
+#: shop/models.py:27
 msgid "Gram Ağırlığı"
 msgstr "Weight (Gram)"
 
-#: shop/models.py:25
+#: shop/models.py:28
 msgid "İşçilik Bedeli"
 msgstr "Labor Cost"
 
-#: shop/models.py:28
+#: shop/models.py:29
 msgid "Perakende Fiyat"
 msgstr "Retail Price"
 
-#: shop/models.py:29
+#: shop/models.py:30
 msgid "Toptan Fiyat"
 msgstr "Wholesale Price"
 
@@ -163,6 +163,14 @@ msgstr "Login"
 #: shop/templates/registration/login.html:11
 msgid "Kullanıcı Girişi"
 msgstr "User Login"
+
+#: shop/templates/registration/login.html:16
+msgid ""
+"Lütfen kullanıcı adınızı ve şifrenizi kontrol edin. Her iki alanın da büyük/"
+"küçük harfe duyarlı olabileceğini unutmayın."
+msgstr ""
+"Please check your username and password. Note that both fields may be case-"
+"sensitive."
 
 #: shop/templates/registration/login.html:24
 msgid "Kullanıcı Adı"
@@ -231,11 +239,11 @@ msgstr "Stay Informed About Our Sparkle"
 msgid "Yeni koleksiyonlar ve indirimler için abone olun."
 msgstr "Subscribe for new collections and discounts."
 
-#: shop/templates/shop/base.html:228
+#: shop/templates/shop/base.html:231
 msgid "E-posta adresiniz"
 msgstr "Your email address"
 
-#: shop/templates/shop/base.html:229
+#: shop/templates/shop/base.html:232
 msgid "Abone Ol"
 msgstr "Subscribe"
 
@@ -445,6 +453,57 @@ msgstr "TRACK YOUR ORDER"
 msgid "Tüm hakları saklıdır."
 msgstr "All rights reserved."
 
+#: shop/templates/shop/product/detail.html:20
+#: shop/templates/shop/product/list.html:38
+msgid "Görsel Yok"
+msgstr "No Image"
+
+#: shop/templates/shop/product/detail.html:32
+msgid "Mağaza"
+msgstr "Shop"
+
+#: shop/templates/shop/product/detail.html:40
+msgid "925 Ayar Gümüş"
+msgstr "925 Sterling Silver"
+
+#: shop/templates/shop/product/detail.html:49
+msgid "* Toptan alımlarda minimum 5 adet zorunludur."
+msgstr ""
+
+#: shop/templates/shop/product/detail.html:53
+msgid "STOKTA VAR"
+msgstr "IN STOCK"
+
+#: shop/templates/shop/product/detail.html:55
+#, fuzzy
+#| msgid "STOKTA VAR"
+msgid "STOKTA YOK"
+msgstr "IN STOCK"
+
+#: shop/templates/shop/product/detail.html:70
+msgid "SEÇENEKLER"
+msgstr "OPTIONS"
+
+#: shop/templates/shop/product/detail.html:72
+msgid "Lütfen bir seçenek belirleyin"
+msgstr "Please select an option"
+
+#: shop/templates/shop/product/detail.html:86
+msgid "ADET"
+msgstr ""
+
+#: shop/templates/shop/product/detail.html:92
+msgid "SEPETE EKLE"
+msgstr "ADD TO CART"
+
+#: shop/templates/shop/product/detail.html:102
+msgid "24 Saatte Kargoda"
+msgstr "Ships within 24 Hours"
+
+#: shop/templates/shop/product/detail.html:105
+msgid "Güvenli Ödeme"
+msgstr "Secure Payment"
+
 #: shop/templates/shop/product/list.html:6
 msgid "Sonuçları"
 msgstr "Results"
@@ -457,10 +516,6 @@ msgstr "Collection"
 #: shop/templates/shop/product/list.html:17
 msgid "İçerik Sonuçları"
 msgstr "Search Results"
-
-#: shop/templates/shop/product/list.html:38
-msgid "Görsel Yok"
-msgstr "No Image"
 
 #: shop/templates/shop/product/list.html:49
 #, fuzzy
@@ -508,57 +563,32 @@ msgstr ""
 "For your security, order details can only be accessed with a correct "
 "tracking number and email match."
 
-#~ msgid "KOLYE"
-#~ msgstr "NECKLACE"
+msgid "KOLYE"
+msgstr "NECKLACE"
 
-#~ msgid "KÜPE"
-#~ msgstr "EARRINGS"
+msgid "KÜPE"
+msgstr "EARRINGS"
 
-#~ msgid "YÜZÜK"
-#~ msgstr "RING"
+msgid "YÜZÜK"
+msgstr "RING"
 
-#~ msgid "BİLEKLİK"
-#~ msgstr "BRACELET"
+msgid "BİLEKLİK"
+msgstr "BRACELET"
 
-#~ msgid "SET"
-#~ msgstr "SET"
+msgid "SET"
+msgstr "SET"
 
-#~ msgid "Genel Toplam"
-#~ msgstr "Grand Total"
+msgid "Genel Toplam"
+msgstr "Grand Total"
 
-#~ msgid "Sepet Özeti"
-#~ msgstr "Cart Summary"
+msgid "Sepet Özeti"
+msgstr "Cart Summary"
 
-#~ msgid "TAKİ PAZAR"
-#~ msgstr "TAKI PAZAR"
+msgid "TAKİ PAZAR"
+msgstr "TAKI PAZAR"
 
-#~ msgid "Zirkon ve Altın Kaplama Şıklığı"
-#~ msgstr "Zircon and Gold Plated Elegance"
+msgid "Zirkon ve Altın Kaplama Şıklığı"
+msgstr "Zircon and Gold Plated Elegance"
 
-#: shop/templates/registration/login.html:16
-msgid "Lütfen kullanıcı adınızı ve şifrenizi kontrol edin. Her iki alanın da büyük/küçük harfe duyarlı olabileceğini unutmayın."
-msgstr "Please check your username and password. Note that both fields may be case-sensitive."
-
-msgid "925 Ayar Gümüş"
-msgstr "925 Sterling Silver"
-
-msgid "STOKTA VAR"
-msgstr "IN STOCK"
-
-msgid "SEÇENEKLER"
-msgstr "OPTIONS"
-
-msgid "Lütfen bir seçenek belirleyin"
-msgstr "Please select an option"
-
-msgid "SEPETE EKLE"
-msgstr "ADD TO CART"
-
-msgid "24 Saatte Kargoda"
-msgstr "Ships within 24 Hours"
-
-msgid "Güvenli Ödeme"
-msgstr "Secure Payment"
-
-msgid "Mağaza"
-msgstr "Shop"
+msgid "Toptan alımlarda minimum 5 adet zorunludur"
+msgstr "Minimum 5 pieces are mandatory for wholesale purchases"

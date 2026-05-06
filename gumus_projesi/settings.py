@@ -120,7 +120,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rmys579@gmail.com'
-EMAIL_HOST_PASSWORD = 'iwgcfjdcvqiwrply'
 DEFAULT_FROM_EMAIL = 'Takı Pazar <rmys579@gmail.com>'
 
 # GÜVENLİK AYARLARI (Yerel testte False olmalı, canlıda True yapılır)
@@ -135,11 +134,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'srmys579@gmail.com' # Buraya kendi mailini yaz
+EMAIL_HOST_USER = 'rmys579@gmail.com' # Buraya kendi mailini yaz
 EMAIL_HOST_PASSWORD = 'bjqposqoxooxgsown' # 16 haneli uygulama şifresi
 DEFAULT_FROM_EMAIL = 'Takı Pazar <rmys579@gmail.com>'
-LANGUAGE_CODE = 'tr-tr'
-TIME_ZONE = 'Europe/Istanbul'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
