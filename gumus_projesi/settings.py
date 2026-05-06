@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig', # Uygulama yapına göre güncellendi
     'cart.apps.CartConfig',
     'import_export',
-    'shop',
 ]
 
 MIDDLEWARE = [
