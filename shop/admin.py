@@ -1,22 +1,30 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from import_export.admin import ImportExportModelAdmin # Yeni eklendi
+from import_export import resources # Yeni eklendi
 from .models import Order, Category, Product, Variation
 
-# Karakter temizleyici (DHL ve global sistemler için) aynı kalıyor
+# Karakter temizleyici (DHL ve global sistemler için)
 def turkish_to_english(text):
     if not text:
         return ""
     chars = str.maketrans("ğĞçÇşŞüÜöÖıİ", "gGcCsSuUoOiI") 
     return text.translate(chars)
 
-# --- YENİ: Varyasyon Tablosu Yapısı ---
+# --- Excel Yapısı İçin Kaynak Sınıfı ---
+class ProductResource(resources.ModelResource):
+    class Meta:
+        model = Product
+        # Excel'de hangi sütunların olacağını belirliyoruz
+        fields = ('id', 'name', 'category', 'price_retail', 'price_wholesale', 'stock', 'description')
+        import_id_fields = ('id',)
+
+# --- Varyasyon Tablosu Yapısı ---
 class VariationInline(admin.TabularInline):
     model = Variation
     extra = 1
     verbose_name = "Varyasyon"
     verbose_name_plural = "Varyasyonlar"
-    # Modelindeki alan isimlerine göre burayı güncelledim
-    # Eğer hata alırsan fields satırını tamamen silebilirsin
     fields = ['name', 'value', 'extra_price'] 
 
 @admin.register(Order)
@@ -48,17 +56,12 @@ class OrderAdmin(admin.ModelAdmin):
         return format_html('''<a class="button" style="background-color:#d40511; color:white; padding:5px 10px; border-radius:4px; cursor:pointer;" onclick="var win = window.open('', '', 'width=400,height=600'); win.document.write('<html><body>' + `{}` + '</body></html>'); win.document.close(); setTimeout(function(){{ win.print(); }}, 500);">DHL Etiketi</a>''', label_content)
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    # Ürün listesi daha detaylı olsun
+# ModelAdmin yerine ImportExportModelAdmin kullanarak Excel butonlarını ekledik
+class ProductAdmin(ImportExportModelAdmin):
+    resource_class = ProductResource # Excel şablonunu bağladık
     list_display = ['name', 'price_retail', 'stock', 'category']
-    # İŞTE SİHİRLİ DOKUNUŞ: Varyasyonları ürünün içine gömdük
     inlines = [VariationInline]
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
-    def get_model_perms(self, request):
-        return super().get_model_perms(request)
-# --- DİKKAT ---
-# VariationAdmin'i sildik çünkü artık ProductAdmin içinde Inline olarak görünüyor.
-# Ayrı bir sayfada tek başına görünmesine gerek kalmadı.
