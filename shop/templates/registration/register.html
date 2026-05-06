@@ -1,19 +1,32 @@
 {% extends "shop/base.html" %}
-{% load i18n %}
 
 {% block content %}
 <div class="container py-5" style="margin-top: 100px;">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow p-4">
-                <h2 class="text-center mb-4">{% trans "Yeni Hesap Oluştur" %}</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary w-100 mt-3">{% trans "Kayıt Ol" %}</button>
-                </form>
-                <div class="text-center mt-3">
-                    <small>{% trans "Zaten hesabınız var mı?" %} <a href="{% url 'login' %}">{% trans "Giriş Yap" %}</a></small>
+        <div class="col-md-5">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-dark text-white text-center py-4">
+                    <h3 class="font-weight-light">Hemen Kaydol</h3>
+                </div>
+                <div class="card-body p-5">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-dark btn-block shadow">Hesabımı Oluştur</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="small"><a href="/login/">Zaten hesabın var mı? Giriş yap</a></div>
                 </div>
             </div>
         </div>

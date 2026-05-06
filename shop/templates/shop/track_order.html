@@ -2,24 +2,29 @@
 {% load i18n static %}
 
 {% block content %}
-<div class="container py-5" style="min-height: 60vh;">
+<div class="container py-5" style="margin-top: 100px; min-height: 60vh;">
     <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
+        <div class="col-md-6">
             <h2 class="fw-bold mb-4">{% trans "Kargo Takibi" %}</h2>
             <p class="text-muted mb-4">{% trans "Siparişinizi doğrulamak için takip numaranızı ve e-posta adresinizi giriniz." %}</p>
             
-            <form action="#" method="GET" class="mt-4">
-                <!-- Takip Numarası -->
-                <div class="mb-3">
-                    <input type="text" name="track_id" class="form-control rounded-0 border-dark py-3" placeholder="{% trans 'Takip Numarası' %}" required>
-                </div>
-                <!-- E-posta Adresi -->
-                <div class="mb-3">
-                    <input type="email" name="email" class="form-control rounded-0 border-dark py-3" placeholder="{% trans 'E-posta Adresi' %}" required>
-                </div>
-                <!-- Sorgula Butonu -->
-                <button class="btn btn-dark rounded-0 px-5 py-3 w-100 fw-bold" type="submit">{% trans "SİPARİŞİ SORGULA" %}</button>
-            </form>
+            <div class="card shadow-sm p-4 border-0">
+                <form action="{% url 'shop:track_order' %}" method="GET">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{% trans "Takip Numarası" %}</label>
+                        <input type="text" name="track_id" class="form-control py-2" placeholder="{% trans 'Takip numaranız' %}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{% trans "E-posta Adresi" %}</label>
+                        <input type="email" name="email" class="form-control py-2" placeholder="{% trans 'E-posta adresiniz' %}" required>
+                    </div>
+                    
+                    <button class="btn btn-dark w-100 py-2 fw-bold" type="submit">
+                        {% trans "SİPARİŞİ SORGULA" %}
+                    </button>
+                </form>
+            </div>
             
             <div class="mt-4 p-3 bg-light border text-start">
                 <small class="text-secondary">

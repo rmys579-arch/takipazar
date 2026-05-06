@@ -614,17 +614,23 @@ msgstr "You can contact us for your questions."
 msgid "Sipariş Özeti"
 msgstr "Order Summary"
 
-msgid "Ürün"
-msgstr "Product"
-
-msgid "Adet"
-msgstr "Quantity"
-
 msgid "Fiyat"
 msgstr "Price"
 
-msgid "Toplam"
-msgstr "Total"
-
 msgid "Ödemeyi Tamamla"
 msgstr "Complete Payment"
+
+msgid "Kargo Takibi"
+msgstr "Order Tracking"
+
+msgid "Siparişinizi doğrulamak için takip numaranızı ve e-posta adresinizi giriniz."
+msgstr "Please enter your tracking number and email address to verify your order."
+
+msgid "Takip Numarası"
+msgstr "Tracking Number"
+
+msgid "Takip numaranız"
+msgstr "Your tracking number"
+
+msgid "SİPARİŞİ SORGULA"
+msgstr "TRACK ORDER"

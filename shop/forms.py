@@ -32,3 +32,23 @@ class OrderCreateForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '5xx xxx xx xx'}),
             'gift_note': forms.Textarea(attrs={'rows': 3, 'class': 'form-control', 'placeholder': 'Hediye notunuz...'}),
         }
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+# Mevcut OrderCreateForm kodların burada kalsın...
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True, label=_("E-posta Adresi"))
+
+    class Meta:
+        model = User
+        fields = ("username", "email")
+        labels = {
+            'username': _("Kullanıcı Adı"),
+            'email': _("E-posta Adresi"),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control' # Bootstrap şıklığı için
