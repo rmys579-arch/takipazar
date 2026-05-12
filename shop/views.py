@@ -197,9 +197,14 @@ def faq(request):
 def return_policy(request):
     return render(request, 'shop/return_policy.html')
 
+# shop/views.py içindeki track_order fonksiyonu için mantık:
 def track_order(request):
-    # Burada ileride kargo API entegrasyonu yapabilirsin. 
-    # Şimdilik sadece sorgulama sayfasını gösteriyoruz.
+    track_id = request.GET.get('track_id')
+    if track_id:
+        # Eğer ASEF bize bir takip linki veriyorsa, kullanıcıyı oraya yönlendirebiliriz
+        fedex_url = f"https://www.fedex.com/fedextrack/?trknbr={track_id}"
+        return redirect(fedex_url)
+    return render(request, 'shop/track_order.html')
     return render(request, 'shop/track_order.html')
 from django.core.mail import send_mail
 from django.utils.translation import get_language # Mevcut dili anlamak için
